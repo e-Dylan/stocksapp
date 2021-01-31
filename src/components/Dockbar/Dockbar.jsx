@@ -9,7 +9,7 @@ import { DockbarContainer, DockButtonsContainer } from './Dockbar.components';
 // UI
 import theme from '../../theme';
 
-export default function Dockbar({ tabs, activeTabs, setActiveTabs }) {
+export default function Dockbar({ tabs, activeTab, setActiveTab }) {
 
 	return (
 		<DockbarContainer>
@@ -17,13 +17,29 @@ export default function Dockbar({ tabs, activeTabs, setActiveTabs }) {
 				{ tabs.map((tab, index) => {
 					if (tab.separator) {
 						return (
-							<Button bg="transparent" m="5px" color="white" mb="80px" fontSize="10pt" _hover={{color: theme.colors.blue[300]}}>
+							// MAKE A CUSTOM BUTTON COMPONENT
+							<Button 
+								bg="transparent" 
+								m="5px" 
+								color={activeTab === tab.id ? theme.colors.blue[500] : "white"} 
+								mb="80px" 
+								fontSize="10pt" 
+								_hover={{color: theme.colors.blue[300]}}
+								onClick={() => setActiveTab(tab.id)}
+							>
 								{tab.title}
 							</Button>
 						)
 					} else {
 						return (
-							<Button bg="transparent" m="5px" color="white" fontSize="10pt" _hover={{color: theme.colors.blue[300]}}>
+							<Button 
+								bg="transparent" 
+								m="5px" 
+								color={activeTab === tab.id ? theme.colors.blue[500] : "white"} 
+								fontSize="10pt" 
+								_hover={{color: theme.colors.blue[300]}} 
+								onClick={() => setActiveTab(tab.id)}
+							>
 								{tab.title}
 							</Button>
 						)
